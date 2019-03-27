@@ -30,6 +30,11 @@ steps:
     projects: '**/*Tests/*.csproj'
     arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'
 # - task: PublishBuildArtifacts@1
+- task: NuGetCommand@2
+  inputs:
+    command: pack
+    packagesToPack: '**/*.csproj'
+    
 - script: dotnet pack /p:PackageVersion=$(version)  # define version variable elsewhere in your pipeline
 
 - task: NuGetCommand@2
